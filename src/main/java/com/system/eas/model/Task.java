@@ -1,12 +1,31 @@
 package com.system.eas.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Task {
     private long taskId;
     private long employeeId;
     private String taskName;
     private String taskDate;
-    private String startTime;
-    private String endTime;
+    private String taskStartTime;
+    private String taskEndTime;
+
+    public Task() {
+    }
+
+    public Task(@JsonProperty("taskId") long taskId,
+                @JsonProperty("employeeId") long employeeId,
+                @JsonProperty("taskName") String taskName,
+                @JsonProperty("taskDate") String taskDate,
+                @JsonProperty("taskStartTime") String taskStartTime,
+                @JsonProperty("taskEndTime") String taskEndTime) {
+        this.taskId = taskId;
+        this.employeeId = employeeId;
+        this.taskName = taskName;
+        this.taskDate = taskDate;
+        this.taskStartTime = taskStartTime;
+        this.taskEndTime = taskEndTime;
+    }
 
     public long getTaskId() {
         return this.taskId;
@@ -40,20 +59,32 @@ public class Task {
         this.taskDate = taskDate;
     }
 
-    public String getStartTime() {
-        return this.startTime;
+    public String getTaskStartTime() {
+        return this.taskStartTime;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setTaskStartTime(String taskStartTime) {
+        this.taskStartTime = taskStartTime;
     }
 
-    public String getEndTime() {
-        return this.endTime;
+    public String getTaskEndTime() {
+        return this.taskEndTime;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setTaskEndTime(String taskEndTime) {
+        this.taskEndTime = taskEndTime;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " taskId='" + getTaskId() + "'" +
+            ", employeeId='" + getEmployeeId() + "'" +
+            ", taskName='" + getTaskName() + "'" +
+            ", taskDate='" + getTaskDate() + "'" +
+            ", taskStartTime='" + getTaskStartTime() + "'" +
+            ", taskEndTime='" + getTaskEndTime() + "'" +
+            "}";
     }
 
 }

@@ -1,14 +1,37 @@
 package com.system.eas.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Employee {
     private long employeeId;
     private String employeeName;
     private String employeeAddress;
     private String employeeEmail;
     private String employeeDepartment;
-    private String joinDate;
+    private String employeeJoinDate;
     private String employeePosition;
     private int employeeSalary;
+
+    public Employee() {
+    }
+
+    public Employee(@JsonProperty("employeeId") long employeeId, 
+                    @JsonProperty("employeeName") String employeeName, 
+                    @JsonProperty("employeeAddress") String employeeAddress, 
+                    @JsonProperty("employeeEmail") String employeeEmail, 
+                    @JsonProperty("employeeDepartment") String employeeDepartment, 
+                    @JsonProperty("employeeJoinDate") String employeeJoinDate, 
+                    @JsonProperty("employeePosition") String employeePosition, 
+                    @JsonProperty("employeeSalary") int employeeSalary) {
+        this.employeeId = employeeId;
+        this.employeeName = employeeName;
+        this.employeeAddress = employeeAddress;
+        this.employeeEmail = employeeEmail;
+        this.employeeDepartment = employeeDepartment;
+        this.employeeJoinDate = employeeJoinDate;
+        this.employeePosition = employeePosition;
+        this.employeeSalary = employeeSalary;
+    }
 
     public long getEmployeeId() {
         return this.employeeId;
@@ -51,11 +74,11 @@ public class Employee {
     }
 
     public String getJoinDate() {
-        return this.joinDate;
+        return this.employeeJoinDate;
     }
 
-    public void setJoinDate(String joinDate) {
-        this.joinDate = joinDate;
+    public void setJoinDate(String employeeJoinDate) {
+        this.employeeJoinDate = joinDate;
     }
 
     public String getEmployeePosition() {
@@ -74,4 +97,18 @@ public class Employee {
         this.employeeSalary = employeeSalary;
     }
 
+    
+    @Override
+    public String toString() {
+        return "{" +
+            " employeeId='" + getEmployeeId() + "'" +
+            ", employeeName='" + getEmployeeName() + "'" +
+            ", employeeAddress='" + getEmployeeAddress() + "'" +
+            ", employeeEmail='" + getEmployeeEmail() + "'" +
+            ", employeeDepartment='" + getEmployeeDepartment() + "'" +
+            ", joinDate='" + getJoinDate() + "'" +
+            ", employeePosition='" + getEmployeePosition() + "'" +
+            ", employeeSalary='" + getEmployeeSalary() + "'" +
+            "}";
+    }
 }

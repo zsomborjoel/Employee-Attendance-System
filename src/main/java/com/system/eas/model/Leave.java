@@ -1,5 +1,7 @@
 package com.system.eas.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Leave {
     private long leaveId;
     private long employeeId;
@@ -9,6 +11,27 @@ public class Leave {
     private String leaveAcceptanceDate;
     private String leaveStartDate;
     private String leaveEndDate;
+
+    public Leave() {
+    }
+
+    public Leave(@JsonProperty("leaveId") long leaveId,
+                @JsonProperty("employeeId") long employeeId,
+                @JsonProperty("leaveTitle") String leaveTitle,
+                @JsonProperty("leaveDetail") String leaveDetail,
+                @JsonProperty("leaveRequestDate") String leaveRequestDate,
+                @JsonProperty("leaveAcceptanceDate") String leaveAcceptanceDate,
+                @JsonProperty("leaveStartDate") String leaveStartDate,
+                @JsonProperty("leaveEndDate") String leaveEndDate) {
+        this.leaveId = leaveId;
+        this.employeeId = employeeId;
+        this.leaveTitle = leaveTitle;
+        this.leaveDetail = leaveDetail;
+        this.leaveRequestDate = leaveRequestDate;
+        this.leaveAcceptanceDate = leaveAcceptanceDate;
+        this.leaveStartDate = leaveStartDate;
+        this.leaveEndDate = leaveEndDate;
+    }
 
     public long getLeaveId() {
         return this.leaveId;
@@ -74,4 +97,18 @@ public class Leave {
         this.leaveEndDate = leaveEndDate;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+            " leaveId='" + getLeaveId() + "'" +
+            ", employeeId='" + getEmployeeId() + "'" +
+            ", leaveTitle='" + getLeaveTitle() + "'" +
+            ", leaveDetail='" + getLeaveDetail() + "'" +
+            ", leaveRequestDate='" + getLeaveRequestDate() + "'" +
+            ", leaveAcceptanceDate='" + getLeaveAcceptanceDate() + "'" +
+            ", leaveStartDate='" + getLeaveStartDate() + "'" +
+            ", leaveEndDate='" + getLeaveEndDate() + "'" +
+            "}";
+    }
+   
 }
