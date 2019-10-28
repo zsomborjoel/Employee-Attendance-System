@@ -1,8 +1,20 @@
 package com.system.eas.model;
 
+import java.util.Objects;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@Entity
+@Table(name = "task")
 public class Task {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long taskId;
     private long employeeId;
     private String taskName;
@@ -73,6 +85,32 @@ public class Task {
 
     public void setTaskEndTime(String taskEndTime) {
         this.taskEndTime = taskEndTime;
+    }
+   
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Task)) {
+            return false;
+        }
+        Task task = (Task) o;
+        return taskId == task.taskId 
+                && employeeId == task.employeeId 
+                && Objects.equals(taskName, task.taskName) 
+                && Objects.equals(taskDate, task.taskDate) 
+                && Objects.equals(taskStartTime, task.taskStartTime) 
+                && Objects.equals(taskEndTime, task.taskEndTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(taskId,
+                            employeeId,
+                            taskName,
+                            taskDate,
+                            taskStartTime,
+                            taskEndTime);
     }
 
     @Override

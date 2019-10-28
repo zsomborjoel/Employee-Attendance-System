@@ -1,8 +1,20 @@
 package com.system.eas.model;
 
+import java.util.Objects;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@Entity
+@Table(name = "leave")
 public class Leave {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long leaveId;
     private long employeeId;
     private String leaveTitle;
@@ -95,6 +107,36 @@ public class Leave {
 
     public void setLeaveEndDate(String leaveEndDate) {
         this.leaveEndDate = leaveEndDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Leave)) {
+            return false;
+        }
+        Leave leave = (Leave) o;
+        return leaveId == leave.leaveId 
+                && employeeId == leave.employeeId 
+                && Objects.equals(leaveTitle, leave.leaveTitle) 
+                && Objects.equals(leaveDetail, leave.leaveDetail) 
+                && Objects.equals(leaveRequestDate, leave.leaveRequestDate) 
+                && Objects.equals(leaveAcceptanceDate, leave.leaveAcceptanceDate) 
+                && Objects.equals(leaveStartDate, leave.leaveStartDate) 
+                && Objects.equals(leaveEndDate, leave.leaveEndDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(leaveId,
+                            employeeId,
+                            leaveTitle,
+                            leaveDetail,
+                            leaveRequestDate,
+                            leaveAcceptanceDate,
+                            leaveStartDate,
+                            leaveEndDate);
     }
 
     @Override

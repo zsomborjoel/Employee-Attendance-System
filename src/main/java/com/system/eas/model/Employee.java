@@ -1,8 +1,21 @@
 package com.system.eas.model;
 
+import java.util.Objects;
+
+import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@Entity
+@Table(name = "employee")
 public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long employeeId;
     private String employeeName;
     private String employeeAddress;
@@ -97,6 +110,35 @@ public class Employee {
         this.employeeSalary = employeeSalary;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Employee)) {
+            return false;
+        }
+        Employee employee = (Employee) o;
+        return employeeId == employee.employeeId 
+                && Objects.equals(employeeName, employee.employeeName) 
+                && Objects.equals(employeeAddress, employee.employeeAddress) 
+                && Objects.equals(employeeEmail, employee.employeeEmail) 
+                && Objects.equals(employeeDepartment, employee.employeeDepartment) 
+                && Objects.equals(employeeJoinDate, employee.employeeJoinDate) 
+                && Objects.equals(employeePosition, employee.employeePosition) 
+                && employeeSalary == employee.employeeSalary;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(employeeId,
+                            employeeName,
+                            employeeAddress,
+                            employeeEmail,
+                            employeeDepartment,
+                            employeeJoinDate,
+                            employeePosition,
+                            employeeSalary);
+    }
     
     @Override
     public String toString() {
