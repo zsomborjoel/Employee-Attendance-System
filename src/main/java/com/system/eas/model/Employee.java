@@ -86,12 +86,12 @@ public class Employee {
         this.employeeDepartment = employeeDepartment;
     }
 
-    public String getJoinDate() {
+    public String getEmployeeJoinDate() {
         return this.employeeJoinDate;
     }
 
-    public void setJoinDate(String employeeJoinDate) {
-        this.employeeJoinDate = joinDate;
+    public void setEmployeeJoinDate(String employeeJoinDate) {
+        this.employeeJoinDate = employeeJoinDate;
     }
 
     public String getEmployeePosition() {
@@ -148,7 +148,7 @@ public class Employee {
             ", employeeAddress='" + getEmployeeAddress() + "'" +
             ", employeeEmail='" + getEmployeeEmail() + "'" +
             ", employeeDepartment='" + getEmployeeDepartment() + "'" +
-            ", joinDate='" + getJoinDate() + "'" +
+            ", joinDate='" + getEmployeeJoinDate() + "'" +
             ", employeePosition='" + getEmployeePosition() + "'" +
             ", employeeSalary='" + getEmployeeSalary() + "'" +
             "}";

@@ -1,44 +1,65 @@
-import java.util.List;
-import java.util.Optional;
+package com.system.eas.controller;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
+import com.system.eas.exception.ResourceNotFoundException;
 import com.system.eas.model.Employee;
 import com.system.eas.repository.EmployeeRepository;
 
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-public class EmployeeController implements EmployeeRepository {
+@RestController
+@RequestMapping("/employees/v1")
+public class EmployeeController {
 
-    @Override
+    @Autowired
+    private EmployeeRepository employeeRepository;    
+
+    @GetMapping("/employees")
     public List<Employee> listAllEmployee() {
-        // TODO Auto-generated method stub
-        return null;
+        return employeeRepository.findAll();
     }
 
-    @Override
-    public void addEmployee(Employee employee) {
-        // TODO Auto-generated method stub
-
+    @PostMapping("/employees")
+    public void addEmployee(@Valid @RequestBody Employee employee) {
+        employeeRepository.save(employee);
     }
 
-    @Override
-    public void deleteEmployee(Long employeeId) {
-        // TODO Auto-generated method stub
-
+    @DeleteMapping("/employees/{employee_id}")
+    public void deleteEmployee(@PathVariable(value = "employee_id")  Long employeeId) throws ResourceNotFoundException {
+        Employee employee = employeeRepository.findById(employeeId)
+                                                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id: " + employeeId));
+        employeeRepository.delete(employee);                                        
     }
 
-    @Override
-    public void updateEmployee(Long employeeId) {
-        // TODO Auto-generated method stub
-
+    @PutMapping("/employees/{employee_id}")
+    public void updateEmployee(@PathVariable(value = "employee_id") Long employeeId, @Valid @RequestBody Employee employeeDetails) throws ResourceNotFoundException {
+        Employee employee = employeeRepository.findById(employeeId)
+                                                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id: " + employeeId)); 
+        employee.setEmployeeName(employeeDetails.getEmployeeName());
+        employee.setEmployeeEmail(employeeDetails.getEmployeeEmail());
+        employee.setEmployeeAddress(employeeDetails.getEmployeeAddress());
+        employee.setEmployeeDepartment(employeeDetails.getEmployeeDepartment());
+        employee.setEmployeePosition(employeeDetails.getEmployeePosition());
+        employee.setEmployeeSalary(employeeDetails.getEmployeeSalary());
+        employee.setEmployeeJoinDate(employeeDetails.getEmployeeJoinDate());
     }
 
-    @Override
-    public Optional<Employee> getEmployeeById(Long employeeId) {
-        // TODO Auto-generated method stub
-        return null;
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable(value = "employee_id") Long employeeId) throws ResourceNotFoundException {
+        Employee employee = employeeRepository.findById(employeeId)
+                                                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id: " + employeeId)); 
+        return ResponseEntity.ok().body(employee);                                  
     }
     
 }
