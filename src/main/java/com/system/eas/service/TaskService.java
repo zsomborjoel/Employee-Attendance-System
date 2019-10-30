@@ -1,11 +1,11 @@
-package com.system.eas.controller;
+package com.system.eas.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import com.system.eas.model.Task;
 
-public class TaskController {
+public class TaskService {
 
     public void addTask(Task task) {
         // TODO Auto-generated method stub
@@ -26,5 +26,5 @@ public class TaskController {
         // TODO Auto-generated method stub
         return null;
     }
-    
+
 }

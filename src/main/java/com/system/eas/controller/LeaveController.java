@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.system.eas.model.Leave;
-import com.system.eas.repository.LeaveRepository;
 
 public class LeaveController {
 
