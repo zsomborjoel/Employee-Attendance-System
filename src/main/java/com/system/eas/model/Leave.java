@@ -1,7 +1,9 @@
 package com.system.eas.model;
 
 import java.util.Objects;
+import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,18 +13,17 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table(name = "leave")
+@Table(name = "leave", schema = "eas")
 public class Leave {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private long leaveId;
     private long employeeId;
     private String leaveTitle;
     private String leaveDetail;
-    private String leaveRequestDate;
-    private String leaveAcceptanceDate;
-    private String leaveStartDate;
-    private String leaveEndDate;
+    private LocalDate leaveRequestDate;
+    private LocalDate leaveAcceptanceDate;
+    private LocalDate leaveStartDate;
+    private LocalDate leaveEndDate;
 
     public Leave() {
     }
@@ -31,10 +32,10 @@ public class Leave {
                 @JsonProperty("employeeId") long employeeId,
                 @JsonProperty("leaveTitle") String leaveTitle,
                 @JsonProperty("leaveDetail") String leaveDetail,
-                @JsonProperty("leaveRequestDate") String leaveRequestDate,
-                @JsonProperty("leaveAcceptanceDate") String leaveAcceptanceDate,
-                @JsonProperty("leaveStartDate") String leaveStartDate,
-                @JsonProperty("leaveEndDate") String leaveEndDate) {
+                @JsonProperty("leaveRequestDate") LocalDate leaveRequestDate,
+                @JsonProperty("leaveAcceptanceDate") LocalDate leaveAcceptanceDate,
+                @JsonProperty("leaveStartDate") LocalDate leaveStartDate,
+                @JsonProperty("leaveEndDate") LocalDate leaveEndDate) {
         this.leaveId = leaveId;
         this.employeeId = employeeId;
         this.leaveTitle = leaveTitle;
@@ -45,6 +46,8 @@ public class Leave {
         this.leaveEndDate = leaveEndDate;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getLeaveId() {
         return this.leaveId;
     }
@@ -61,6 +64,7 @@ public class Leave {
         this.employeeId = employeeId;
     }
 
+    @Column(name = "leave_title", nullable = true)
     public String getLeaveTitle() {
         return this.leaveTitle;
     }
@@ -69,6 +73,7 @@ public class Leave {
         this.leaveTitle = leaveTitle;
     }
 
+    @Column(name = "leave_detail", nullable = true)
     public String getLeaveDetail() {
         return this.leaveDetail;
     }
@@ -77,35 +82,39 @@ public class Leave {
         this.leaveDetail = leaveDetail;
     }
 
-    public String getLeaveRequestDate() {
+    @Column(name = "leave_request_date", nullable = true)
+    public LocalDate getLeaveRequestDate() {
         return this.leaveRequestDate;
     }
 
-    public void setLeaveRequestDate(String leaveRequestDate) {
+    public void setLeaveRequestDate(LocalDate leaveRequestDate) {
         this.leaveRequestDate = leaveRequestDate;
     }
 
-    public String getLeaveAcceptanceDate() {
+    @Column(name = "leave_acceptance_date", nullable = true)
+    public LocalDate getLeaveAcceptanceDate() {
         return this.leaveAcceptanceDate;
     }
 
-    public void setLeaveAcceptanceDate(String leaveAcceptanceDate) {
+    public void setLeaveAcceptanceDate(LocalDate leaveAcceptanceDate) {
         this.leaveAcceptanceDate = leaveAcceptanceDate;
     }
 
-    public String getLeaveStartDate() {
+    @Column(name = "leave_start_date", nullable = true)
+    public LocalDate getLeaveStartDate() {
         return this.leaveStartDate;
     }
 
-    public void setLeaveStartDate(String leaveStartDate) {
+    public void setLeaveStartDate(LocalDate leaveStartDate) {
         this.leaveStartDate = leaveStartDate;
     }
 
-    public String getLeaveEndDate() {
+    @Column(name = "leave_end_date", nullable = true)
+    public LocalDate getLeaveEndDate() {
         return this.leaveEndDate;
     }
 
-    public void setLeaveEndDate(String leaveEndDate) {
+    public void setLeaveEndDate(LocalDate leaveEndDate) {
         this.leaveEndDate = leaveEndDate;
     }
 
@@ -142,14 +151,14 @@ public class Leave {
     @Override
     public String toString() {
         return "{" +
-            " leaveId='" + getLeaveId() + "'" +
-            ", employeeId='" + getEmployeeId() + "'" +
+            " leaveId='" + Long.toString(getLeaveId()) + "'" +
+            ", employeeId='" + Long.toString(getEmployeeId()) + "'" +
             ", leaveTitle='" + getLeaveTitle() + "'" +
             ", leaveDetail='" + getLeaveDetail() + "'" +
             ", leaveRequestDate='" + getLeaveRequestDate() + "'" +
-            ", leaveAcceptanceDate='" + getLeaveAcceptanceDate() + "'" +
-            ", leaveStartDate='" + getLeaveStartDate() + "'" +
-            ", leaveEndDate='" + getLeaveEndDate() + "'" +
+            ", leaveAcceptanceDate='" + getLeaveAcceptanceDate().toString() + "'" +
+            ", leaveStartDate='" + getLeaveStartDate().toString() + "'" +
+            ", leaveEndDate='" + getLeaveEndDate().toString() + "'" +
             "}";
     }
    

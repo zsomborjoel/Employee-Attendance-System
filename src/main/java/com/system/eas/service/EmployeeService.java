@@ -22,8 +22,8 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public void addEmployee(Employee employee) {
-        employeeRepository.save(employee);
+    public Employee addEmployee(Employee employee) {
+        return employeeRepository.save(employee);
     }
 
     public void deleteEmployee(Long employeeId) throws ResourceNotFoundException {
@@ -32,7 +32,7 @@ public class EmployeeService {
         employeeRepository.delete(employee);                                        
     }
 
-    public void updateEmployee(Long employeeId, Employee employeeDetails) throws ResourceNotFoundException {
+    public ResponseEntity<Employee> updateEmployee(Long employeeId, Employee employeeDetails) throws ResourceNotFoundException {
         Employee employee = employeeRepository.findById(employeeId)
                                                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id: " + employeeId)); 
         employee.setEmployeeName(employeeDetails.getEmployeeName());
@@ -42,6 +42,8 @@ public class EmployeeService {
         employee.setEmployeePosition(employeeDetails.getEmployeePosition());
         employee.setEmployeeSalary(employeeDetails.getEmployeeSalary());
         employee.setEmployeeJoinDate(employeeDetails.getEmployeeJoinDate());
+        final Employee updatedEmployee = employeeRepository.save(employee);
+        return ResponseEntity.ok(updatedEmployee);
     }
 
     public ResponseEntity<Employee> getEmployeeById(Long employeeId) throws ResourceNotFoundException {

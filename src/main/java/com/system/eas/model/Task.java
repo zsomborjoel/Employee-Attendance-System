@@ -1,7 +1,10 @@
 package com.system.eas.model;
 
 import java.util.Objects;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,16 +14,15 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table(name = "task")
+@Table(name = "task", schema = "eas")
 public class Task {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private long taskId;
     private long employeeId;
     private String taskName;
-    private String taskDate;
-    private String taskStartTime;
-    private String taskEndTime;
+    private LocalDate taskDate;
+    private LocalDateTime taskStartTime;
+    private LocalDateTime taskEndTime;
 
     public Task() {
     }
@@ -28,9 +30,9 @@ public class Task {
     public Task(@JsonProperty("taskId") long taskId,
                 @JsonProperty("employeeId") long employeeId,
                 @JsonProperty("taskName") String taskName,
-                @JsonProperty("taskDate") String taskDate,
-                @JsonProperty("taskStartTime") String taskStartTime,
-                @JsonProperty("taskEndTime") String taskEndTime) {
+                @JsonProperty("taskDate") LocalDate taskDate,
+                @JsonProperty("taskStartTime") LocalDateTime taskStartTime,
+                @JsonProperty("taskEndTime") LocalDateTime taskEndTime) {
         this.taskId = taskId;
         this.employeeId = employeeId;
         this.taskName = taskName;
@@ -39,6 +41,8 @@ public class Task {
         this.taskEndTime = taskEndTime;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getTaskId() {
         return this.taskId;
     }
@@ -55,6 +59,7 @@ public class Task {
         this.employeeId = employeeId;
     }
 
+    @Column(name = "task_name", nullable = true)
     public String getTaskName() {
         return this.taskName;
     }
@@ -63,27 +68,30 @@ public class Task {
         this.taskName = taskName;
     }
 
-    public String getTaskDate() {
+    @Column(name = "task_date", nullable = true)
+    public LocalDate getTaskDate() {
         return this.taskDate;
     }
 
-    public void setTaskDate(String taskDate) {
+    public void setTaskDate(LocalDate taskDate) {
         this.taskDate = taskDate;
     }
 
-    public String getTaskStartTime() {
+    @Column(name = "task_start_time", nullable = true)
+    public LocalDateTime getTaskStartTime() {
         return this.taskStartTime;
     }
 
-    public void setTaskStartTime(String taskStartTime) {
+    public void setTaskStartTime(LocalDateTime taskStartTime) {
         this.taskStartTime = taskStartTime;
     }
 
-    public String getTaskEndTime() {
+    @Column(name = "task_end_time", nullable = true)
+    public LocalDateTime getTaskEndTime() {
         return this.taskEndTime;
     }
 
-    public void setTaskEndTime(String taskEndTime) {
+    public void setTaskEndTime(LocalDateTime taskEndTime) {
         this.taskEndTime = taskEndTime;
     }
    
@@ -116,12 +124,12 @@ public class Task {
     @Override
     public String toString() {
         return "{" +
-            " taskId='" + getTaskId() + "'" +
-            ", employeeId='" + getEmployeeId() + "'" +
+            " taskId='" + Long.toString(getTaskId()) + "'" +
+            ", employeeId='" + Long.toString(getEmployeeId()) + "'" +
             ", taskName='" + getTaskName() + "'" +
-            ", taskDate='" + getTaskDate() + "'" +
-            ", taskStartTime='" + getTaskStartTime() + "'" +
-            ", taskEndTime='" + getTaskEndTime() + "'" +
+            ", taskDate='" + getTaskDate().toString() + "'" +
+            ", taskStartTime='" + getTaskStartTime().toString() + "'" +
+            ", taskEndTime='" + getTaskEndTime().toString() + "'" +
             "}";
     }
 
