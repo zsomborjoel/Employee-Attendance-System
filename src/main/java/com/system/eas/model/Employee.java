@@ -1,7 +1,9 @@
 package com.system.eas.model;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,16 +13,15 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "employee", schema = "eas")
 public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private long employeeId;
     private String employeeName;
     private String employeeAddress;
     private String employeeEmail;
     private String employeeDepartment;
-    private String employeeJoinDate;
+    private LocalDate employeeJoinDate;
     private String employeePosition;
     private int employeeSalary;
 
@@ -32,7 +33,7 @@ public class Employee {
                     @JsonProperty("employeeAddress") String employeeAddress, 
                     @JsonProperty("employeeEmail") String employeeEmail, 
                     @JsonProperty("employeeDepartment") String employeeDepartment, 
-                    @JsonProperty("employeeJoinDate") String employeeJoinDate, 
+                    @JsonProperty("employeeJoinDate") LocalDate employeeJoinDate, 
                     @JsonProperty("employeePosition") String employeePosition, 
                     @JsonProperty("employeeSalary") int employeeSalary) {
         this.employeeId = employeeId;
@@ -45,6 +46,8 @@ public class Employee {
         this.employeeSalary = employeeSalary;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getEmployeeId() {
         return this.employeeId;
     }
@@ -53,6 +56,7 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
+    @Column(name = "employee_name", nullable = true)
     public String getEmployeeName() {
         return this.employeeName;
     }
@@ -61,6 +65,7 @@ public class Employee {
         this.employeeName = employeeName;
     }
 
+    @Column(name = "employee_address", nullable = true)
     public String getEmployeeAddress() {
         return this.employeeAddress;
     }
@@ -69,6 +74,7 @@ public class Employee {
         this.employeeAddress = employeeAddress;
     }
 
+    @Column(name = "employee_email", nullable = true)
     public String getEmployeeEmail() {
         return this.employeeEmail;
     }
@@ -77,6 +83,7 @@ public class Employee {
         this.employeeEmail = employeeEmail;
     }
 
+    @Column(name = "employee_department", nullable = true)
     public String getEmployeeDepartment() {
         return this.employeeDepartment;
     }
@@ -85,14 +92,16 @@ public class Employee {
         this.employeeDepartment = employeeDepartment;
     }
 
-    public String getEmployeeJoinDate() {
+    @Column(name = "employee_join_date", nullable = true)
+    public LocalDate getEmployeeJoinDate() {
         return this.employeeJoinDate;
     }
 
-    public void setEmployeeJoinDate(String employeeJoinDate) {
+    public void setEmployeeJoinDate(LocalDate employeeJoinDate) {
         this.employeeJoinDate = employeeJoinDate;
     }
 
+    @Column(name = "employee_position", nullable = true)
     public String getEmployeePosition() {
         return this.employeePosition;
     }
@@ -101,6 +110,7 @@ public class Employee {
         this.employeePosition = employeePosition;
     }
 
+    @Column(name = "employee_salary", nullable = true)
     public int getEmployeeSalary() {
         return this.employeeSalary;
     }
@@ -142,14 +152,14 @@ public class Employee {
     @Override
     public String toString() {
         return "{" +
-            " employeeId='" + getEmployeeId() + "'" +
+            " employeeId='" + Long.toString(getEmployeeId()) + "'" +
             ", employeeName='" + getEmployeeName() + "'" +
             ", employeeAddress='" + getEmployeeAddress() + "'" +
             ", employeeEmail='" + getEmployeeEmail() + "'" +
             ", employeeDepartment='" + getEmployeeDepartment() + "'" +
-            ", joinDate='" + getEmployeeJoinDate() + "'" +
+            ", joinDate='" + getEmployeeJoinDate().toString() + "'" +
             ", employeePosition='" + getEmployeePosition() + "'" +
-            ", employeeSalary='" + getEmployeeSalary() + "'" +
+            ", employeeSalary='" + Integer.toString(getEmployeeSalary()) + "'" +
             "}";
     }
 }

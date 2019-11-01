@@ -26,7 +26,7 @@ public class EmployeeService {
         employeeRepository.save(employee);
     }
 
-    public void deleteEmployee( Long employeeId) throws ResourceNotFoundException {
+    public void deleteEmployee(Long employeeId) throws ResourceNotFoundException {
         Employee employee = employeeRepository.findById(employeeId)
                                                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id: " + employeeId));
         employeeRepository.delete(employee);                                        

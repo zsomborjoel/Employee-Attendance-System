@@ -1,4 +1,6 @@
-CREATE TABLE public.employee (
+CREATE SCHEMA eas; -- Employee Attendance System
+
+CREATE TABLE eas.employee (
     employee_id INT PRIMARY KEY,
     employee_name VARCHAR(100),
     employee_address VARCHAR(255),
@@ -10,9 +12,9 @@ CREATE TABLE public.employee (
     created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX pk_employee_id_idx ON employee (employee_id);
+CREATE INDEX pk_employee_id_idx ON eas.employee (employee_id);
 
-CREATE TABLE public.leave (
+CREATE TABLE eas.leave (
     leave_id INT PRIMARY KEY,
     employee_id INT,
     leave_title VARCHAR(100),
@@ -24,10 +26,10 @@ CREATE TABLE public.leave (
     created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX pk_leave_id_idx ON leave (leave_id);
-CREATE INDEX fk_leave_employee_id_idx ON leave (employee_id);
+CREATE INDEX pk_leave_id_idx ON eas.leave (leave_id);
+CREATE INDEX fk_leave_employee_id_idx ON eas.leave (employee_id);
 
-CREATE TABLE public.task (
+CREATE TABLE eas.task (
     task_id INT PRIMARY KEY,
     employee_id INT,
     task_name VARCHAR(100),
@@ -37,7 +39,7 @@ CREATE TABLE public.task (
     created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX pk_task_id_idx ON task (task_id);
-CREATE INDEX fk_task_employee_id_idx ON task (employee_id);
+CREATE INDEX pk_task_id_idx ON eas.task (task_id);
+CREATE INDEX fk_task_employee_id_idx ON eas.task (employee_id);
 
 COMMIT;
