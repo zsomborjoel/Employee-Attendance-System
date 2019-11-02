@@ -4,12 +4,23 @@ import java.util.List;
 import java.util.Optional;
 
 import com.system.eas.model.Leave;
+import com.system.eas.service.LeaveService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/v1")
 public class LeaveController {
 
-    public void applyLeave(Leave leave) {
-        // TODO Auto-generated method stub
+    @Autowired
+    private LeaveService leaveService;
 
+    @PostMapping("/leave")
+    public Leave applyLeave(Leave leave) {
+        return leaveService.applyLeave(leave);
     }
 
     public void cancelLeave(Long leaveId) {

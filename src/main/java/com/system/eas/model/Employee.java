@@ -1,13 +1,16 @@
 package com.system.eas.model;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,6 +27,7 @@ public class Employee {
     private LocalDate employeeJoinDate;
     private String employeePosition;
     private int employeeSalary;
+    private List<Leave> leave;
 
     public Employee() {
     }
@@ -117,6 +121,15 @@ public class Employee {
 
     public void setEmployeeSalary(int employeeSalary) {
         this.employeeSalary = employeeSalary;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<Leave> getLeave() {
+        return this.leave;
+    }
+
+    public void setLeave(List<Leave> leave) {
+        this.leave = leave;
     }
 
     @Override

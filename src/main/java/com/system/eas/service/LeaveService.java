@@ -16,8 +16,8 @@ public class LeaveService {
     @Autowired
     private LeaveRepository leaveRepository;
 
-    public void applyLeave(Leave leave) {
-        leaveRepository.save(leave);
+    public Leave applyLeave(Leave leave) {
+        return leaveRepository.save(leave);
     }
 
     public void cancelLeave(Long leaveId) throws ResourceNotFoundException {
@@ -33,6 +33,7 @@ public class LeaveService {
     }
 
     public Leave getLeaveByEmployeeId(Long employeeId) {
+        List<Leave> leave = leaveRepository.
         return null;
     }
 

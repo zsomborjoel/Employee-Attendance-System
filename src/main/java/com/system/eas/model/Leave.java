@@ -5,9 +5,12 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Leave {
 
     private long leaveId;
-    private long employeeId;
+    private Employee employee;
     private String leaveTitle;
     private String leaveDetail;
     private LocalDate leaveRequestDate;
@@ -29,7 +32,7 @@ public class Leave {
     }
 
     public Leave(@JsonProperty("leaveId") long leaveId,
-                @JsonProperty("employeeId") long employeeId,
+                @JsonProperty("employee") Employee employee,
                 @JsonProperty("leaveTitle") String leaveTitle,
                 @JsonProperty("leaveDetail") String leaveDetail,
                 @JsonProperty("leaveRequestDate") LocalDate leaveRequestDate,
@@ -37,7 +40,7 @@ public class Leave {
                 @JsonProperty("leaveStartDate") LocalDate leaveStartDate,
                 @JsonProperty("leaveEndDate") LocalDate leaveEndDate) {
         this.leaveId = leaveId;
-        this.employeeId = employeeId;
+        this.employee = employee;
         this.leaveTitle = leaveTitle;
         this.leaveDetail = leaveDetail;
         this.leaveRequestDate = leaveRequestDate;
@@ -56,12 +59,14 @@ public class Leave {
         this.leaveId = leaveId;
     }
 
-    public long getEmployeeId() {
-        return this.employeeId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id")
+    public Employee getEmployee() {
+        return this.employee;
     }
 
-    public void setEmployeeId(long employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     @Column(name = "leave_title", nullable = true)
@@ -127,7 +132,6 @@ public class Leave {
         }
         Leave leave = (Leave) o;
         return leaveId == leave.leaveId 
-                && employeeId == leave.employeeId 
                 && Objects.equals(leaveTitle, leave.leaveTitle) 
                 && Objects.equals(leaveDetail, leave.leaveDetail) 
                 && Objects.equals(leaveRequestDate, leave.leaveRequestDate) 
@@ -139,7 +143,6 @@ public class Leave {
     @Override
     public int hashCode() {
         return Objects.hash(leaveId,
-                            employeeId,
                             leaveTitle,
                             leaveDetail,
                             leaveRequestDate,
@@ -152,7 +155,6 @@ public class Leave {
     public String toString() {
         return "{" +
             " leaveId='" + Long.toString(getLeaveId()) + "'" +
-            ", employeeId='" + Long.toString(getEmployeeId()) + "'" +
             ", leaveTitle='" + getLeaveTitle() + "'" +
             ", leaveDetail='" + getLeaveDetail() + "'" +
             ", leaveRequestDate='" + getLeaveRequestDate() + "'" +
