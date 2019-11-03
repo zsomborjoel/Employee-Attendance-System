@@ -1,13 +1,13 @@
 package com.system.eas.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.system.eas.exception.ResourceNotFoundException;
 import com.system.eas.model.Leave;
 import com.system.eas.repository.LeaveRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,20 +26,18 @@ public class LeaveService {
         leaveRepository.delete(leave);
     }
 
-    public Leave getLeaveById(Long leaveId) throws ResourceNotFoundException {
+    public ResponseEntity<Leave> getLeaveById(Long leaveId) throws ResourceNotFoundException {
         Leave leave = leaveRepository.findById(leaveId)
                                         .orElseThrow(() -> new ResourceNotFoundException("Leave not found for this id: " + leaveId));
-        return leave;
-    }
-
-    public Leave getLeaveByEmployeeId(Long employeeId) {
-        List<Leave> leave = leaveRepository.
-        return null;
+        return ResponseEntity.ok().body(leave);
     }
 
     public List<Leave> listAllLeave() {
-        // TODO Auto-generated method stub
-        return null;
+        return leaveRepository.findAll();
+    }
+
+    public List<Leave> getLeaveByEmployeeId(Long employeeId) throws ResourceNotFoundException {
+        return leaveRepository.findByEmployee(employeeId);
     }
 
 }
