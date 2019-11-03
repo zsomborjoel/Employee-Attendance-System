@@ -10,6 +10,6 @@ import com.system.eas.model.Leave;
 @Repository
 public interface LeaveRepository extends JpaRepository<Leave, Long> {
 
-    public List<Leave> findByEmployee(Long employeeId);
+    List<Leave> findByEmployeeEmployeeId(Long employeeId);
 
 }

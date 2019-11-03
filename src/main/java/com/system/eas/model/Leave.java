@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-//import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,19 +13,42 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "leave", schema = "eas")
 public class Leave {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long leaveId;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "employee_id", nullable = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private Employee employee;
+
+    @Column(name = "leave_title", nullable = true)
     private String leaveTitle;
+
+    @Column(name = "leave_detail", nullable = true)
     private String leaveDetail;
+
+    @Column(name = "leave_request_date", nullable = true)
     private LocalDate leaveRequestDate;
+
+    @Column(name = "leave_acceptance_date", nullable = true)
     private LocalDate leaveAcceptanceDate;
+
+    @Column(name = "leave_start_date", nullable = true)
     private LocalDate leaveStartDate;
+
+    @Column(name = "leave_end_date", nullable = true)
     private LocalDate leaveEndDate;
 
     public Leave() {
@@ -50,8 +72,7 @@ public class Leave {
         this.leaveEndDate = leaveEndDate;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    
     public long getLeaveId() {
         return this.leaveId;
     }
@@ -60,8 +81,6 @@ public class Leave {
         this.leaveId = leaveId;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id")
     public Employee getEmployee() {
         return this.employee;
     }
@@ -70,7 +89,6 @@ public class Leave {
         this.employee = employee;
     }
 
-    @Column(name = "leave_title", nullable = true)
     public String getLeaveTitle() {
         return this.leaveTitle;
     }
@@ -79,7 +97,6 @@ public class Leave {
         this.leaveTitle = leaveTitle;
     }
 
-    @Column(name = "leave_detail", nullable = true)
     public String getLeaveDetail() {
         return this.leaveDetail;
     }
@@ -88,7 +105,6 @@ public class Leave {
         this.leaveDetail = leaveDetail;
     }
 
-    @Column(name = "leave_request_date", nullable = true)
     public LocalDate getLeaveRequestDate() {
         return this.leaveRequestDate;
     }
@@ -97,7 +113,6 @@ public class Leave {
         this.leaveRequestDate = leaveRequestDate;
     }
 
-    @Column(name = "leave_acceptance_date", nullable = true)
     public LocalDate getLeaveAcceptanceDate() {
         return this.leaveAcceptanceDate;
     }
@@ -106,7 +121,6 @@ public class Leave {
         this.leaveAcceptanceDate = leaveAcceptanceDate;
     }
 
-    @Column(name = "leave_start_date", nullable = true)
     public LocalDate getLeaveStartDate() {
         return this.leaveStartDate;
     }
@@ -115,7 +129,6 @@ public class Leave {
         this.leaveStartDate = leaveStartDate;
     }
 
-    @Column(name = "leave_end_date", nullable = true)
     public LocalDate getLeaveEndDate() {
         return this.leaveEndDate;
     }

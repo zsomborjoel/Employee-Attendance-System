@@ -1,17 +1,13 @@
 package com.system.eas.model;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,15 +16,30 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Table(name = "employee", schema = "eas")
 public class Employee {
 
-    private long employeeId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long employeeId;
+
+    @Column(name = "employee_name", nullable = true)
     private String employeeName;
+
+    @Column(name = "employee_address", nullable = true)
     private String employeeAddress;
+
+    @Column(name = "employee_email", nullable = true)
     private String employeeEmail;
+
+    @Column(name = "employee_department", nullable = true)
     private String employeeDepartment;
+
+    @Column(name = "employee_join_date", nullable = true)
     private LocalDate employeeJoinDate;
+
+    @Column(name = "employee_position", nullable = true)
     private String employeePosition;
+
+    @Column(name = "employee_salary", nullable = true)
     private int employeeSalary;
-    private List<Leave> leave;
 
     public Employee() {
     }
@@ -51,8 +62,6 @@ public class Employee {
         this.employeeSalary = employeeSalary;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getEmployeeId() {
         return this.employeeId;
     }
@@ -61,7 +70,6 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
-    @Column(name = "employee_name", nullable = true)
     public String getEmployeeName() {
         return this.employeeName;
     }
@@ -70,7 +78,6 @@ public class Employee {
         this.employeeName = employeeName;
     }
 
-    @Column(name = "employee_address", nullable = true)
     public String getEmployeeAddress() {
         return this.employeeAddress;
     }
@@ -79,7 +86,6 @@ public class Employee {
         this.employeeAddress = employeeAddress;
     }
 
-    @Column(name = "employee_email", nullable = true)
     public String getEmployeeEmail() {
         return this.employeeEmail;
     }
@@ -88,7 +94,6 @@ public class Employee {
         this.employeeEmail = employeeEmail;
     }
 
-    @Column(name = "employee_department", nullable = true)
     public String getEmployeeDepartment() {
         return this.employeeDepartment;
     }
@@ -97,7 +102,6 @@ public class Employee {
         this.employeeDepartment = employeeDepartment;
     }
 
-    @Column(name = "employee_join_date", nullable = true)
     public LocalDate getEmployeeJoinDate() {
         return this.employeeJoinDate;
     }
@@ -106,7 +110,6 @@ public class Employee {
         this.employeeJoinDate = employeeJoinDate;
     }
 
-    @Column(name = "employee_position", nullable = true)
     public String getEmployeePosition() {
         return this.employeePosition;
     }
@@ -115,22 +118,12 @@ public class Employee {
         this.employeePosition = employeePosition;
     }
 
-    @Column(name = "employee_salary", nullable = true)
     public int getEmployeeSalary() {
         return this.employeeSalary;
     }
 
     public void setEmployeeSalary(int employeeSalary) {
         this.employeeSalary = employeeSalary;
-    }
-
-    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
-    public List<Leave> getLeave() {
-        return this.leave;
-    }
-
-    public void setLeave(List<Leave> leave) {
-        this.leave = leave;
     }
 
     @Override

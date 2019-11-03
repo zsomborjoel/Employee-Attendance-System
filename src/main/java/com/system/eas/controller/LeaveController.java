@@ -1,7 +1,6 @@
 package com.system.eas.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -26,9 +25,9 @@ public class LeaveController {
     @Autowired
     private LeaveService leaveService;
 
-    @PostMapping("/leaves")
-    public Leave applyLeave(@Valid @RequestBody Leave leave) {
-        return leaveService.applyLeave(leave);
+    @PostMapping("/employees/{employee_id}/leaves")
+    public Leave applyLeave(@PathVariable(value = "employee_id") Long employeeId, @Valid @RequestBody Leave leave) throws ResourceNotFoundException {
+        return leaveService.applyLeave(employeeId, leave);
     }
 
     @DeleteMapping("/leaves/{leave_id}")
@@ -41,14 +40,8 @@ public class LeaveController {
         return leaveService.getLeaveById(leaveId);
     }
 
-    @GetMapping("/leaves")
-    public List<Leave> listAllLeave() {
-        return leaveService.listAllLeave();
+    @GetMapping("/employees/{employee_id}/leaves")
+    public List<Leave> getAllLeavesByEmployeeId(@PathVariable(value = "employee_id") Long employeeId) {
+        return leaveService.getAllLeavesByEmployeeId(employeeId);
     }
-
-    @GetMapping("/leaves/{employee_id}/employees")
-    public List<Leave> getLeaveByEmplyoyeeId(@PathVariable(value = "employee_id") Long employeeId) throws ResourceNotFoundException {
-        return leaveService.getLeaveByEmployeeId(employeeId);
-    }
-    
 }
