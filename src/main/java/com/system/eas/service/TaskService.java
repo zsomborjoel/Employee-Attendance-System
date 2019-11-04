@@ -1,30 +1,46 @@
 package com.system.eas.service;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
+import com.system.eas.exception.ResourceNotFoundException;
 import com.system.eas.model.Task;
+import com.system.eas.repository.EmployeeRepository;
+import com.system.eas.repository.TaskRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class TaskService {
 
+    @Autowired
+    TaskRepository taskRepository;
+
+    @Autowired
+    EmployeeRepository employeeRepository;
+
     public void addTask(Task task) {
-        // TODO Auto-generated method stub
-
+        taskRepository.save(task);
     }
 
-    public void deleteTask(Long taskId) {
-        // TODO Auto-generated method stub
+    public void deleteTask(Long taskId) throws ResourceNotFoundException {
+        Task task = taskRepository.findById(taskId)
+                                    .orElseThrow(() -> new ResourceNotFoundException("Task not found for this id: " + taskId));
+        taskRepository.delete(task);
+    }    
 
+    public Task getTaskById(Long taskId) throws ResourceNotFoundException {
+        return taskRepository.findById(taskId)
+                                    .orElseThrow(() -> new ResourceNotFoundException("Task not found for this id: " + taskId));
     }
 
-    public Optional<Task> getTaskById(Long taskId) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Task> listAllTaskByDate(LocalDate date) {
+        return taskRepository.findByTaskTaskDate(date);
     }
 
-    public List<Task> listAllTaskByDate(String date) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Task> listAllTaskByEmployeeId(Long employeeId) {
+        return taskRepository.findByEmployeeEmployeeId(employeeId);
     }
 
 }

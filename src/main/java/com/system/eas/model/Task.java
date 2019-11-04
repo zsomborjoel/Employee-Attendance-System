@@ -6,22 +6,44 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "task", schema = "eas")
 public class Task {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long taskId;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "employee_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private long employeeId;
+
+    @Column(name = "task_name", nullable = true)
     private String taskName;
+
+    @Column(name = "task_date", nullable = true)
     private LocalDate taskDate;
+
+    @Column(name = "task_start_time", nullable = true)
     private LocalDateTime taskStartTime;
+
+    @Column(name = "task_end_time", nullable = true)
     private LocalDateTime taskEndTime;
 
     public Task() {
@@ -41,8 +63,6 @@ public class Task {
         this.taskEndTime = taskEndTime;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getTaskId() {
         return this.taskId;
     }
@@ -59,7 +79,6 @@ public class Task {
         this.employeeId = employeeId;
     }
 
-    @Column(name = "task_name", nullable = true)
     public String getTaskName() {
         return this.taskName;
     }
@@ -68,7 +87,6 @@ public class Task {
         this.taskName = taskName;
     }
 
-    @Column(name = "task_date", nullable = true)
     public LocalDate getTaskDate() {
         return this.taskDate;
     }
@@ -77,7 +95,6 @@ public class Task {
         this.taskDate = taskDate;
     }
 
-    @Column(name = "task_start_time", nullable = true)
     public LocalDateTime getTaskStartTime() {
         return this.taskStartTime;
     }
@@ -86,7 +103,6 @@ public class Task {
         this.taskStartTime = taskStartTime;
     }
 
-    @Column(name = "task_end_time", nullable = true)
     public LocalDateTime getTaskEndTime() {
         return this.taskEndTime;
     }
