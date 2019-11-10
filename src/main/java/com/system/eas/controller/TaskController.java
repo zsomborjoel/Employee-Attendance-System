@@ -42,7 +42,8 @@ public class TaskController {
 
     @GetMapping("/tasks/{task_date}")
     public List<Task> listAllTaskByDate(@PathVariable(value = "task_date") LocalDate date) {
-        return taskService.listAllTaskByDate(date);
+        return null;
+        //return taskService.listAllTaskByDate(date);
     }
 
     @GetMapping("/employees/{employee_id}/tasks")

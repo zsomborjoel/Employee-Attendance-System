@@ -13,6 +13,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     
     List<Task> findByEmployeeEmployeeId(Long employeeId);
 
-    List<Task> findByTaskTaskDate(LocalDate date);
+    //List<Task> findByTaskTaskDate(LocalDate date);
 
 }

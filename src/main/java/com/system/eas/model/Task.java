@@ -32,7 +32,7 @@ public class Task {
     @JoinColumn(name = "employee_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private long employeeId;
+    private Employee employee;
 
     @Column(name = "task_name", nullable = true)
     private String taskName;
@@ -50,13 +50,13 @@ public class Task {
     }
 
     public Task(@JsonProperty("taskId") long taskId,
-                @JsonProperty("employeeId") long employeeId,
+                @JsonProperty("employee") Employee employee,
                 @JsonProperty("taskName") String taskName,
                 @JsonProperty("taskDate") LocalDate taskDate,
                 @JsonProperty("taskStartTime") LocalDateTime taskStartTime,
                 @JsonProperty("taskEndTime") LocalDateTime taskEndTime) {
         this.taskId = taskId;
-        this.employeeId = employeeId;
+        this.employee = employee;
         this.taskName = taskName;
         this.taskDate = taskDate;
         this.taskStartTime = taskStartTime;
@@ -71,12 +71,12 @@ public class Task {
         this.taskId = taskId;
     }
 
-    public long getEmployeeId() {
-        return this.employeeId;
+    public Employee getEmployee() {
+        return this.employee;
     }
 
-    public void setEmployeeId(long employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public String getTaskName() {
@@ -120,7 +120,6 @@ public class Task {
         }
         Task task = (Task) o;
         return taskId == task.taskId 
-                && employeeId == task.employeeId 
                 && Objects.equals(taskName, task.taskName) 
                 && Objects.equals(taskDate, task.taskDate) 
                 && Objects.equals(taskStartTime, task.taskStartTime) 
@@ -130,7 +129,6 @@ public class Task {
     @Override
     public int hashCode() {
         return Objects.hash(taskId,
-                            employeeId,
                             taskName,
                             taskDate,
                             taskStartTime,
@@ -141,7 +139,6 @@ public class Task {
     public String toString() {
         return "{" +
             " taskId='" + Long.toString(getTaskId()) + "'" +
-            ", employeeId='" + Long.toString(getEmployeeId()) + "'" +
             ", taskName='" + getTaskName() + "'" +
             ", taskDate='" + getTaskDate().toString() + "'" +
             ", taskStartTime='" + getTaskStartTime().toString() + "'" +

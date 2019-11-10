@@ -35,10 +35,12 @@ public class TaskService {
                                     .orElseThrow(() -> new ResourceNotFoundException("Task not found for this id: " + taskId));
     }
 
+    /*
     public List<Task> listAllTaskByDate(LocalDate date) {
         return taskRepository.findByTaskTaskDate(date);
     }
-
+    */
+    
     public List<Task> listAllTaskByEmployeeId(Long employeeId) {
         return taskRepository.findByEmployeeEmployeeId(employeeId);
     }

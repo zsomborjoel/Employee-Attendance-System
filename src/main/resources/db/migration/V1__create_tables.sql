@@ -34,7 +34,7 @@ CREATE TABLE eas.task (
     employee_id INT,
     task_name VARCHAR(100),
     task_date DATE,
-    tast_start_time TIME WITHOUT TIME ZONE,
+    task_start_time TIME WITHOUT TIME ZONE,
     task_end_time TIME WITHOUT TIME ZONE,
     created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
