@@ -25,7 +25,7 @@ public class Leave {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long leaveId;
+    private Long leaveId;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "employee_id", nullable = true)
@@ -54,7 +54,7 @@ public class Leave {
     public Leave() {
     }
 
-    public Leave(@JsonProperty("leaveId") long leaveId,
+    public Leave(@JsonProperty("leaveId") Long leaveId,
                 @JsonProperty("employee") Employee employee,
                 @JsonProperty("leaveTitle") String leaveTitle,
                 @JsonProperty("leaveDetail") String leaveDetail,
@@ -73,11 +73,11 @@ public class Leave {
     }
 
     
-    public long getLeaveId() {
+    public Long getLeaveId() {
         return this.leaveId;
     }
 
-    public void setLeaveId(long leaveId) {
+    public void setLeaveId(Long leaveId) {
         this.leaveId = leaveId;
     }
 

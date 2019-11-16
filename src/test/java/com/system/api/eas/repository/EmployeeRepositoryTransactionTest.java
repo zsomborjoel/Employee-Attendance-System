@@ -1,57 +1,61 @@
 package com.system.api.eas.repository;
 
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 import com.system.eas.Application;
 import com.system.eas.model.Employee;
 import com.system.eas.repository.EmployeeRepository;
-import com.system.eas.service.EmployeeService;
 
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-
+@RunWith(SpringRunner.class)
 @ContextConfiguration(classes = Application.class)
 @SpringBootTest
 public class EmployeeRepositoryTransactionTest {
 
-    @Mock
+    @Autowired
     private EmployeeRepository employeeRepository;
 
-    @InjectMocks
-    private EmployeeService employeeService;
-
-
     @Test
-    public void testSampleService() {
-        assertTrue(true);
-    }
-    
-    @Test
-    public void testInjectedComponentsAreNotNull() {
-        assertThat(employeeRepository, is(not(null)));
+    public void testEmployeeRepository() {
+        assertNotNull(employeeRepository);
     }
 
     @Test
-    public void testShouldGetBackEmployee() {
-        Optional<Employee> employee = employeeRepository.findById((long) 2);
+    public void testSaveEmployee() {
+        Employee employee = new Employee();
+        employee.setEmployeeName("TestEmployee");
+        employeeRepository.save(employee);
+        Optional<Employee> employee2 = employeeRepository.findById(employee.getEmployeeId());
+        assertNotNull(employee2);
+        assertEquals(employee.getEmployeeName(), employee2.get().getEmployeeName());
     }
-    
+ 
     @Test
-    public void testShouldFinishTransaction() {
-        LocalDate dt = LocalDate.parse("2019-10-10");
-        Long id = (long) 99;
-        employeeRepository.save(new Employee(id, "Joe", "Marine street 4", "joe@fm.co", "sales", dt, "manager", 100000));
+    public void testDeleteEmployee() {
+        Employee employee = new Employee();
+        employee.setEmployeeName("TestEmployee");
+        employeeRepository.save(employee);
+        employeeRepository.delete(employee);
     }
-    
+
+    @Test
+    public void testFindAllEmployees() {
+        assertNotNull(employeeRepository.findAll());
+    }
+
+    @Test
+    public void testDeleteByEmployeeId() {
+        Employee employee = new Employee();
+        employee.setEmployeeName("TestEmployee");
+        employeeRepository.deleteById(employee.getEmployeeId());
+    }
 }

@@ -62,11 +62,11 @@ public class Employee {
         this.employeeSalary = employeeSalary;
     }
 
-    public long getEmployeeId() {
+    public Long getEmployeeId() {
         return this.employeeId;
     }
 
-    public void setEmployeeId(long employeeId) {
+    public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
 

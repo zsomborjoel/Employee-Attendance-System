@@ -26,7 +26,7 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long taskId;
+    private Long taskId;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "employee_id", nullable = false)
@@ -49,7 +49,7 @@ public class Task {
     public Task() {
     }
 
-    public Task(@JsonProperty("taskId") long taskId,
+    public Task(@JsonProperty("taskId") Long taskId,
                 @JsonProperty("employee") Employee employee,
                 @JsonProperty("taskName") String taskName,
                 @JsonProperty("taskDate") LocalDate taskDate,
@@ -63,11 +63,11 @@ public class Task {
         this.taskEndTime = taskEndTime;
     }
 
-    public long getTaskId() {
+    public Long getTaskId() {
         return this.taskId;
     }
 
-    public void setTaskId(long taskId) {
+    public void setTaskId(Long taskId) {
         this.taskId = taskId;
     }
 

@@ -7,5 +7,5 @@ import com.system.eas.model.Employee;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
-
+    Employee findByEmployeeName(String username);
 }
