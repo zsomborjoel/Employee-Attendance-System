@@ -168,13 +168,13 @@ public class Leave {
     @Override
     public String toString() {
         return "{" +
-            " leaveId='" + Long.toString(getLeaveId()) + "'" +
+            " leaveId='" + getLeaveId() + "'" +
             ", leaveTitle='" + getLeaveTitle() + "'" +
             ", leaveDetail='" + getLeaveDetail() + "'" +
             ", leaveRequestDate='" + getLeaveRequestDate() + "'" +
-            ", leaveAcceptanceDate='" + getLeaveAcceptanceDate().toString() + "'" +
-            ", leaveStartDate='" + getLeaveStartDate().toString() + "'" +
-            ", leaveEndDate='" + getLeaveEndDate().toString() + "'" +
+            ", leaveAcceptanceDate='" + getLeaveAcceptanceDate() + "'" +
+            ", leaveStartDate='" + getLeaveStartDate() + "'" +
+            ", leaveEndDate='" + getLeaveEndDate() + "'" +
             "}";
     }
    

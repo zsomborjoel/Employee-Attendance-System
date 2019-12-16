@@ -159,14 +159,14 @@ public class Employee {
     @Override
     public String toString() {
         return "{" +
-            " employeeId='" + Long.toString(getEmployeeId()) + "'" +
+            " employeeId='" + getEmployeeId() + "'" +
             ", employeeName='" + getEmployeeName() + "'" +
             ", employeeAddress='" + getEmployeeAddress() + "'" +
             ", employeeEmail='" + getEmployeeEmail() + "'" +
             ", employeeDepartment='" + getEmployeeDepartment() + "'" +
-            ", joinDate='" + getEmployeeJoinDate().toString() + "'" +
+            ", joinDate='" + getEmployeeJoinDate() + "'" +
             ", employeePosition='" + getEmployeePosition() + "'" +
-            ", employeeSalary='" + Integer.toString(getEmployeeSalary()) + "'" +
+            ", employeeSalary='" + getEmployeeSalary() + "'" +
             "}";
     }
 }

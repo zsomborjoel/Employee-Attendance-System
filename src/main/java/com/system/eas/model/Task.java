@@ -138,11 +138,11 @@ public class Task {
     @Override
     public String toString() {
         return "{" +
-            " taskId='" + Long.toString(getTaskId()) + "'" +
+            " taskId='" + getTaskId() + "'" +
             ", taskName='" + getTaskName() + "'" +
-            ", taskDate='" + getTaskDate().toString() + "'" +
-            ", taskStartTime='" + getTaskStartTime().toString() + "'" +
-            ", taskEndTime='" + getTaskEndTime().toString() + "'" +
+            ", taskDate='" + getTaskDate() + "'" +
+            ", taskStartTime='" + getTaskStartTime() + "'" +
+            ", taskEndTime='" + getTaskEndTime() + "'" +
             "}";
     }
 
