@@ -1,6 +1,7 @@
 package com.comp.contactmanager.controller;
 
 import com.comp.contactmanager.domain.dto.PersonCreateRequest;
+import com.comp.contactmanager.domain.dto.PersonDeleteRequest;
 import com.comp.contactmanager.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,21 @@ public class PersonController {
         try {
             personService.createPerson(request);
             return ResponseEntity.ok("Person created");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e);
+        }
+    }
+
+    private ResponseEntity<?> deletePerson(@RequestBody PersonDeleteRequest request) {
+        if (request == null) {
+            return ResponseEntity.badRequest().body("Empty request");
+        }
+
+        try {
+            personService.deletePerson(request);
+            return ResponseEntity.ok("Person deleted");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e);
         } catch (Exception e) {

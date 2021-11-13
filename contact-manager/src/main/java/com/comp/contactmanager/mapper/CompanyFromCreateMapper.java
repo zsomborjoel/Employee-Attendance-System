@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.function.Function;
 
 @Component
-public class CompanyMapper implements Function<CompanyCreateRequest, Company> {
+public class CompanyFromCreateMapper implements Function<CompanyCreateRequest, Company> {
 
     @Override
     public Company apply(CompanyCreateRequest request) {

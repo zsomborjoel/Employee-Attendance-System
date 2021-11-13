@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.function.Function;
 
 @Component
-public class PersonMapper implements Function<PersonCreateRequest, Person> {
+public class PersonFromCreateMapper implements Function<PersonCreateRequest, Person> {
 
     @Override
     public Person apply(PersonCreateRequest request) {

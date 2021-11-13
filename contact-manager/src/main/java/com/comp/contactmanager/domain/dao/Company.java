@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public class Company {
 
     @Id
-    @GeneratedValue(generator="COMPANY_SEQ", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
     @JsonIgnore
     private Integer id;
