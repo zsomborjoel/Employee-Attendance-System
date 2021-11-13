@@ -1,7 +1,7 @@
 package com.comp.contactmanager.controller;
 
-import com.comp.contactmanager.domain.dto.PersonCreateRequest;
-import com.comp.contactmanager.service.PersonService;
+import com.comp.contactmanager.domain.dto.CompanyCreateRequest;
+import com.comp.contactmanager.service.CompanyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class PersonController {
+public class CompanyController {
 
-    private final PersonService personService;
+    private final CompanyService companyService;
 
-    @PostMapping("/person/create")
-    private ResponseEntity<?> createPerson(@RequestBody PersonCreateRequest request) {
+    @PostMapping("/company/create")
+    private ResponseEntity<?> createCompany(@RequestBody CompanyCreateRequest request) {
         if (request == null) {
             return ResponseEntity.badRequest().body("Empty request");
         }
 
         try {
-            personService.createPerson(request);
-            return ResponseEntity.ok("Person created");
+            companyService.createCompany(request);
+            return ResponseEntity.ok("Company created");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e);
         } catch (Exception e) {

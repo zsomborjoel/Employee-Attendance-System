@@ -2,6 +2,7 @@ package com.comp.contactmanager.service;
 
 import com.comp.contactmanager.domain.dao.Person;
 import com.comp.contactmanager.domain.dto.PersonCreateRequest;
+import com.comp.contactmanager.domain.exception.InvalidCompanyException;
 import com.comp.contactmanager.domain.exception.InvalidPhoneNumberException;
 import com.comp.contactmanager.mapper.PersonMapper;
 import com.comp.contactmanager.repository.PersonRepository;
@@ -28,7 +29,7 @@ public class PersonService {
 
         List<String> companyNames = companyService.getCompanyNames();
         if (!isInCompanies(personCreateRequest.getCompany(), companyNames)) {
-            throw new InvalidPhoneNumberException("Requested company is not valid");
+            throw new InvalidCompanyException("Requested company is not valid");
         }
 
         Person person = personMapper.apply(personCreateRequest);
